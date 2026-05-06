@@ -1,0 +1,1618 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VONEA.SK — Marketingová stratégia 2026</title>
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #12121a;
+    --card: #1a1a26;
+    --border: #2a2a3d;
+    --accent: #7c5cbf;
+    --accent2: #b89cff;
+    --gold: #c9a84c;
+    --gold2: #f0d080;
+    --text: #e8e8f0;
+    --muted: #8888aa;
+    --green: #4caf82;
+    --red: #e05555;
+    --blue: #4c8fff;
+    --radius: 16px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+    font-size: 16px;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(10,10,15,0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 32px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 60px;
+  }
+  .nav-brand { font-size: 14px; font-weight: 700; color: var(--accent2); letter-spacing: 2px; text-transform: uppercase; }
+  .nav-links { display: flex; gap: 24px; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 13px; transition: color .2s; }
+  .nav-links a:hover { color: var(--text); }
+
+  /* PROGRESS BAR */
+  #progress-bar {
+    position: fixed; top: 60px; left: 0; right: 0; z-index: 99;
+    height: 2px; background: var(--border);
+  }
+  #progress-fill {
+    height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--gold));
+    transition: width .1s;
+  }
+
+  /* MAIN */
+  main { padding-top: 60px; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    text-align: center;
+    background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(124,92,191,0.15) 0%, transparent 70%),
+                radial-gradient(ellipse 60% 40% at 80% 70%, rgba(201,168,76,0.08) 0%, transparent 60%),
+                var(--bg);
+    padding: 80px 32px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='30' r='1' fill='%237c5cbf' opacity='0.15'/%3E%3C/svg%3E") repeat;
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(124,92,191,0.15); border: 1px solid rgba(124,92,191,0.4);
+    color: var(--accent2); font-size: 12px; font-weight: 600; letter-spacing: 1.5px;
+    text-transform: uppercase; padding: 6px 16px; border-radius: 100px;
+    margin-bottom: 28px;
+  }
+  .hero h1 {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 800; line-height: 1.1;
+    background: linear-gradient(135deg, #fff 0%, var(--accent2) 50%, var(--gold2) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    margin-bottom: 16px;
+  }
+  .hero-sub {
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    color: var(--muted); max-width: 600px; margin: 0 auto 40px;
+  }
+  .hero-meta {
+    display: flex; gap: 32px; justify-content: center; flex-wrap: wrap;
+    font-size: 13px; color: var(--muted);
+  }
+  .hero-meta span { display: flex; align-items: center; gap: 6px; }
+  .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); display: inline-block; }
+
+  /* STATS ROW */
+  .stats-row {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px;
+    padding: 0 32px; max-width: 1200px; margin: -48px auto 0; position: relative; z-index: 2;
+  }
+  .stat-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 24px; text-align: center;
+    transition: border-color .3s, transform .2s;
+  }
+  .stat-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .stat-num { font-size: 2rem; font-weight: 800; color: var(--accent2); }
+  .stat-label { font-size: 12px; color: var(--muted); margin-top: 4px; text-transform: uppercase; letter-spacing: 1px; }
+
+  /* SECTIONS */
+  section {
+    max-width: 1200px; margin: 0 auto; padding: 80px 32px;
+    border-bottom: 1px solid var(--border);
+  }
+  section:last-child { border-bottom: none; }
+
+  .section-label {
+    font-size: 11px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 12px;
+  }
+  h2 {
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: 800; line-height: 1.2; margin-bottom: 16px;
+    color: var(--text);
+  }
+  .section-intro { font-size: 1.05rem; color: var(--muted); max-width: 680px; margin-bottom: 48px; }
+
+  /* GRID */
+  .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+
+  /* CARDS */
+  .card {
+    background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 28px; transition: border-color .3s, transform .2s;
+  }
+  .card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .card-icon { font-size: 2rem; margin-bottom: 16px; }
+  .card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; }
+  .card p { font-size: 0.9rem; color: var(--muted); }
+
+  .card-accent { border-color: var(--accent); background: rgba(124,92,191,0.06); }
+  .card-gold { border-color: var(--gold); background: rgba(201,168,76,0.06); }
+  .card-green { border-color: var(--green); background: rgba(76,175,130,0.06); }
+  .card-red { border-color: var(--red); background: rgba(224,85,85,0.06); }
+
+  /* HIGHLIGHT BOX */
+  .highlight {
+    background: linear-gradient(135deg, rgba(124,92,191,0.12), rgba(201,168,76,0.08));
+    border: 1px solid rgba(124,92,191,0.35);
+    border-radius: var(--radius); padding: 32px; margin: 32px 0;
+  }
+  .highlight h3 { font-size: 1.15rem; font-weight: 700; color: var(--accent2); margin-bottom: 12px; }
+
+  /* TAGS */
+  .tag {
+    display: inline-block; padding: 4px 12px; border-radius: 100px;
+    font-size: 12px; font-weight: 600; margin: 4px 4px 4px 0;
+  }
+  .tag-green { background: rgba(76,175,130,0.15); color: var(--green); border: 1px solid rgba(76,175,130,0.3); }
+  .tag-red { background: rgba(224,85,85,0.15); color: var(--red); border: 1px solid rgba(224,85,85,0.3); }
+  .tag-blue { background: rgba(76,143,255,0.15); color: var(--blue); border: 1px solid rgba(76,143,255,0.3); }
+  .tag-gold { background: rgba(201,168,76,0.15); color: var(--gold2); border: 1px solid rgba(201,168,76,0.3); }
+  .tag-purple { background: rgba(124,92,191,0.15); color: var(--accent2); border: 1px solid rgba(124,92,191,0.3); }
+
+  /* MARKET FUNNEL */
+  .funnel { display: flex; flex-direction: column; gap: 8px; max-width: 560px; }
+  .funnel-row {
+    display: flex; align-items: center; gap: 16px;
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 16px 20px;
+    transition: border-color .2s;
+  }
+  .funnel-row:hover { border-color: var(--accent); }
+  .funnel-bar {
+    height: 6px; border-radius: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+  }
+  .funnel-num { font-size: 1.1rem; font-weight: 800; color: var(--accent2); min-width: 80px; }
+  .funnel-label { font-size: 0.85rem; color: var(--muted); }
+
+  /* TIMELINE */
+  .timeline { display: flex; flex-direction: column; gap: 0; }
+  .tl-item { display: flex; gap: 24px; padding-bottom: 32px; position: relative; }
+  .tl-left { display: flex; flex-direction: column; align-items: center; width: 40px; flex-shrink: 0; }
+  .tl-dot {
+    width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; font-weight: 800; flex-shrink: 0;
+    background: var(--card); border: 2px solid var(--border);
+    z-index: 1;
+  }
+  .tl-dot.active { border-color: var(--accent); background: rgba(124,92,191,0.15); color: var(--accent2); }
+  .tl-dot.gold { border-color: var(--gold); background: rgba(201,168,76,0.12); color: var(--gold2); }
+  .tl-line { flex: 1; width: 2px; background: var(--border); margin-top: 8px; }
+  .tl-item:last-child .tl-line { display: none; }
+  .tl-content { flex: 1; padding-top: 8px; }
+  .tl-week { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+  .tl-title { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+  .tl-body { font-size: 0.875rem; color: var(--muted); }
+  .tl-tags { margin-top: 10px; }
+
+  /* TABLE */
+  .table-wrap { overflow-x: auto; border-radius: var(--radius); border: 1px solid var(--border); }
+  table { width: 100%; border-collapse: collapse; }
+  th {
+    background: var(--card); color: var(--muted); font-size: 11px; font-weight: 700;
+    letter-spacing: 1.5px; text-transform: uppercase; text-align: left; padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  td { padding: 14px 20px; font-size: 0.9rem; border-bottom: 1px solid rgba(255,255,255,0.04); }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(255,255,255,0.02); }
+
+  /* LEGAL RULES */
+  .rule-row {
+    display: flex; align-items: flex-start; gap: 16px;
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    padding: 20px; margin-bottom: 12px; transition: border-color .2s;
+  }
+  .rule-row.ok { border-left: 4px solid var(--green); }
+  .rule-row.no { border-left: 4px solid var(--red); }
+  .rule-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; }
+  .rule-title { font-weight: 700; font-size: 0.95rem; margin-bottom: 4px; }
+  .rule-desc { font-size: 0.85rem; color: var(--muted); }
+
+  /* BUDGET SLIDER VISUAL */
+  .budget-phases { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+  .phase-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px;
+    text-align: center; transition: border-color .2s, transform .2s;
+  }
+  .phase-card:hover { transform: translateY(-3px); border-color: var(--accent); }
+  .phase-num { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); margin-bottom: 8px; }
+  .phase-budget { font-size: 2rem; font-weight: 800; color: var(--gold2); }
+  .phase-unit { font-size: 0.8rem; color: var(--muted); margin-bottom: 12px; }
+  .phase-goal { font-size: 0.85rem; color: var(--text); }
+  .phase-bar { height: 4px; border-radius: 2px; margin-top: 16px; background: var(--border); }
+  .phase-fill { height: 100%; border-radius: 2px; background: linear-gradient(90deg, var(--accent), var(--gold)); }
+
+  /* SCRIPT BLOCK */
+  .script-block {
+    background: #0d0d18; border: 1px solid var(--border); border-radius: 12px;
+    padding: 24px; font-family: 'Courier New', monospace; font-size: 0.875rem;
+    color: #aaa; line-height: 1.8; position: relative; margin: 16px 0;
+  }
+  .script-block .hook { color: var(--gold2); font-weight: 700; }
+  .script-block .body { color: var(--text); }
+  .script-block .cta { color: var(--green); font-weight: 700; }
+  .script-label {
+    font-size: 10px; text-transform: uppercase; letter-spacing: 2px;
+    color: var(--accent); margin-bottom: 12px; display: block;
+  }
+
+  /* PRICING */
+  .price-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 28px; text-align: center; transition: all .3s;
+  }
+  .price-card.featured {
+    border-color: var(--accent); background: rgba(124,92,191,0.1);
+    transform: scale(1.02);
+  }
+  .price-card .badge {
+    display: inline-block; background: var(--accent); color: white;
+    font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+    padding: 4px 12px; border-radius: 100px; margin-bottom: 16px;
+  }
+  .price-val { font-size: 2.5rem; font-weight: 900; color: var(--text); }
+  .price-unit { font-size: 0.85rem; color: var(--muted); margin-bottom: 20px; }
+  .price-features { list-style: none; text-align: left; }
+  .price-features li {
+    font-size: 0.875rem; color: var(--muted); padding: 8px 0;
+    border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px;
+  }
+  .price-features li:last-child { border-bottom: none; }
+  .price-features li::before { content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0; }
+
+  /* KPI */
+  .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; }
+  .kpi-card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+    padding: 20px; text-align: center;
+  }
+  .kpi-target { font-size: 1.6rem; font-weight: 800; color: var(--accent2); }
+  .kpi-name { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-top: 4px; }
+  .kpi-note { font-size: 0.75rem; color: var(--muted); margin-top: 8px; padding-top: 8px; border-top: 1px solid var(--border); }
+
+  /* COMPARISON TABLE */
+  .comp-table th { text-align: center; }
+  .comp-table td { text-align: center; }
+  .comp-table td:first-child { text-align: left; font-weight: 600; }
+  .check { color: var(--green); font-size: 1.1rem; }
+  .cross { color: var(--red); font-size: 1.1rem; }
+
+  /* FOOTER */
+  footer {
+    text-align: center; padding: 48px 32px;
+    border-top: 1px solid var(--border);
+    color: var(--muted); font-size: 0.875rem;
+  }
+  footer strong { color: var(--text); }
+
+  /* UTILS */
+  .mt-8 { margin-top: 8px; }
+  .mt-16 { margin-top: 16px; }
+  .mt-24 { margin-top: 24px; }
+  .mt-32 { margin-top: 32px; }
+  .mb-24 { margin-bottom: 24px; }
+  .text-gold { color: var(--gold2); }
+  .text-green { color: var(--green); }
+  .text-red { color: var(--red); }
+  .text-accent { color: var(--accent2); }
+  .text-muted { color: var(--muted); }
+  .font-bold { font-weight: 700; }
+
+  /* SCROLL ANIMATIONS */
+  .fade-in { opacity: 0; transform: translateY(20px); transition: opacity .6s, transform .6s; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 640px) {
+    nav { padding: 0 16px; }
+    .nav-links { display: none; }
+    section { padding: 48px 16px; }
+    .stats-row { padding: 0 16px; margin-top: -24px; }
+    .hero { padding: 80px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">Vonea.sk — Stratégia</div>
+  <div class="nav-links">
+    <a href="#market">Trh</a>
+    <a href="#product">Produkt</a>
+    <a href="#legal">Právny rámec</a>
+    <a href="#meta">Meta Ads</a>
+    <a href="#content">Kreatívy</a>
+    <a href="#pricing">Ceny</a>
+    <a href="#plan">Plán</a>
+  </div>
+</nav>
+<div id="progress-bar"><div id="progress-fill"></div></div>
+
+<!-- HERO -->
+<main>
+<div class="hero">
+  <div class="hero-badge"><span class="dot"></span> Marketingová stratégia 2026</div>
+  <h1>VONEA.SK</h1>
+  <p class="hero-sub">Parfumy do vysávača — stratégia pre rast, škálovanie a dlhodobé budovanie brandu v Slovakia & CEE</p>
+  <div class="hero-meta">
+    <span>📅 Máj 2026</span>
+    <span>📋 Pripravil: Damián Drahovský</span>
+    <span>🎯 Klient: Dalibor Hutník</span>
+  </div>
+</div>
+
+<!-- QUICK STATS -->
+<div class="stats-row">
+  <div class="stat-card">
+    <div class="stat-num">€2.45</div>
+    <div class="stat-label">Dokázaná CPA</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num">2.25M</div>
+    <div class="stat-label">Domácností SK s vysávačom</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num">€29.80</div>
+    <div class="stat-label">Priemerná objednávka (hero set)</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num">7</div>
+    <div class="stat-label">Krajín — domény kupené</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num">€10</div>
+    <div class="stat-label">Max. CPA pre ziskovosť</div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- 1. EXECUTIVE SUMMARY -->
+<!-- ============================================================ -->
+<section id="summary" class="fade-in">
+  <div class="section-label">01 — Zhrnutie</div>
+  <h2>Kde sa nachádzate & kam ideme</h2>
+  <p class="section-intro">
+    Vonea.sk je young brand so silným produktovým konceptom, dokázanou CPA a čistým štartom po resete ad účtu.
+    Všetky podmienky pre rast sú splnené — chýba len správna stratégia.
+  </p>
+
+  <div class="grid-2">
+    <div class="card card-green">
+      <div class="card-icon">✅</div>
+      <h3>Silné stránky</h3>
+      <p>
+        ✓ Vlastná výroba (rovnaký výrobca ako Puella, Giovanni)<br>
+        ✓ Európska ochranná známka schválená<br>
+        ✓ Profesionálny fulfillment sklad<br>
+        ✓ Dokázaná CPA €2.45 na fresh účte<br>
+        ✓ Unikátny produkt — prémiové parfumy do vysávača<br>
+        ✓ Čistý nový ad účet bez histórie banov
+      </p>
+    </div>
+    <div class="card card-accent">
+      <div class="card-icon">🎯</div>
+      <h3>Kľúčové príležitosti</h3>
+      <p>
+        → Blue ocean: prémiové parfumy do vysávača nemajú konkurenta<br>
+        → Paralelný trend s parfumami do prania (pred 5 rokmi "hlúposť")<br>
+        → Škálovanie do 7 krajín — základ hotový<br>
+        → Nízka CPA → vysoký potenciál ROAS<br>
+        → Obsah si vedia tvoriť sami (cost saving)
+      </p>
+    </div>
+  </div>
+
+  <div class="highlight mt-32">
+    <h3>🏆 Hlavný fokus: Parfumy do vysávača ako hero produkt</h3>
+    <p style="color: var(--muted)">
+      Parfumy do prania sú brutálne konkurenčné. Parfumy do vysávača sú kategória, kde Vonea.sk môže byť
+      <strong style="color: var(--text)">prvý prémiový hráč</strong> na slovenskom trhu —
+      rovnako ako parfumy do prania pred 5 rokmi. Toto je okno príležitosti, ktoré treba využiť teraz.
+    </p>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- 2. MARKET ANALYSIS -->
+<!-- ============================================================ -->
+<section id="market" class="fade-in">
+  <div class="section-label">02 — Analýza trhu</div>
+  <h2>Slovenský trh & potenciál</h2>
+  <p class="section-intro">
+    Koľko ľudí môžeme reálne osloviť na Slovensku a aký veľký je obchodný potenciál.
+  </p>
+
+  <div class="grid-2">
+    <div>
+      <h3 class="mb-24" style="font-size:1.1rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px;">Trhový lievik — Slovensko</h3>
+      <div class="funnel">
+        <div class="funnel-row">
+          <div>
+            <div class="funnel-num">2 376 000</div>
+            <div class="funnel-label">Celkový počet domácností SK</div>
+          </div>
+          <div style="flex:1">
+            <div class="funnel-bar" style="width:100%"></div>
+          </div>
+        </div>
+        <div class="funnel-row">
+          <div>
+            <div class="funnel-num">2 257 000</div>
+            <div class="funnel-label">Domácnosti s vysávačom (~95%)</div>
+          </div>
+          <div style="flex:1">
+            <div class="funnel-bar" style="width:95%"></div>
+          </div>
+        </div>
+        <div class="funnel-row">
+          <div>
+            <div class="funnel-num">~900 000</div>
+            <div class="funnel-label">Ženy 25–50 — primárny rozhodca nákupu</div>
+          </div>
+          <div style="flex:1">
+            <div class="funnel-bar" style="width:60%"></div>
+          </div>
+        </div>
+        <div class="funnel-row">
+          <div>
+            <div class="funnel-num">~450 000</div>
+            <div class="funnel-label">Kupujú prémiové domáce vône (20%)</div>
+          </div>
+          <div style="flex:1">
+            <div class="funnel-bar" style="width:30%"></div>
+          </div>
+        </div>
+        <div class="funnel-row" style="border-color: var(--accent);">
+          <div>
+            <div class="funnel-num" style="color: var(--gold2);">~90 000</div>
+            <div class="funnel-label">Reálne adresovateľný trh Meta (rok 1)</div>
+          </div>
+          <div style="flex:1">
+            <div class="funnel-bar" style="width:12%; background: linear-gradient(90deg, var(--gold), var(--gold2));"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <h3 class="mb-24" style="font-size:1.1rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px;">Konkurenčná krajina</h3>
+
+      <div class="rule-row ok">
+        <div class="rule-icon">🟢</div>
+        <div>
+          <div class="rule-title">Generic trh (Electra, Datart)</div>
+          <div class="rule-desc">Vanilka, citrón, levanduľa za €5–6. Žiadna prémiová vôňa, žiadny branding. Vonea.sk ich cenovo ani pozične nekonkuruje.</div>
+        </div>
+      </div>
+
+      <div class="rule-row ok">
+        <div class="rule-icon">🟡</div>
+        <div>
+          <div class="rule-title">VONEA, EURONA (SK trh)</div>
+          <div class="rule-desc">Existujú, ale komunikujú "osvieženie vzduchu" — nie luxusná vôňa. Slabé branding, slabý marketing.</div>
+        </div>
+      </div>
+
+      <div class="rule-row ok" style="border-left-color: var(--green);">
+        <div class="rule-icon">🚀</div>
+        <div>
+          <div class="rule-title">Prémiové "inšpirované" parfumy do vysávača</div>
+          <div class="rule-desc"><strong style="color:var(--green)">Nikto to nerobí.</strong> Vonea.sk je prvý v tejto kategórii. Okno príležitosti je otvorené.</div>
+        </div>
+      </div>
+
+      <div class="card card-gold mt-16">
+        <div style="font-size:0.85rem; color: var(--muted);">Ročný príjmový potenciál SK trhu</div>
+        <div style="font-size:2rem; font-weight:800; color:var(--gold2); margin: 8px 0;">€540K – €1.35M</div>
+        <div style="font-size:0.8rem; color:var(--muted)">90 000 zákazníkov × €6–15 ročná útrata na vône do vysávača</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-32">
+    <h3 style="margin-bottom:20px; font-size:1.1rem">Prečo práve teraz — paralela s parfumami do prania</h3>
+    <div class="table-wrap">
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th>Fáza</th>
+            <th>Parfumy do prania (vtedy)</th>
+            <th>Parfumy do vysávača (teraz)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Reakcia trhu</td>
+            <td>"Prečo, keď existujú avivaže?"</td>
+            <td>"Prečo, keď existujú osviežovače vzduchu?"</td>
+          </tr>
+          <tr>
+            <td>Konkurencia</td>
+            <td>Minimálna pri štarte</td>
+            <td><strong class="text-green">Minimálna — teraz</strong></td>
+          </tr>
+          <tr>
+            <td>Výsledok</td>
+            <td>Puella €30M+ obrat</td>
+            <td>Príležitosť pre Vonea.sk</td>
+          </tr>
+          <tr>
+            <td>Reklama</td>
+            <td>Meta/UGC fungoval dobre</td>
+            <td><strong class="text-green">Meta/UGC: CPA €2.45 ✓</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- 3. PRODUCT STRATEGY -->
+<!-- ============================================================ -->
+<section id="product" class="fade-in">
+  <div class="section-label">03 — Produktová stratégia</div>
+  <h2>Hero produkt & ponuka</h2>
+  <p class="section-intro">
+    Fokus na jeden jasný hero produkt, ktorý budeme škálovať. Parfumy do prania nechávame ako upsell.
+  </p>
+
+  <div class="grid-3">
+    <div class="card card-gold">
+      <div class="card-icon">⭐</div>
+      <h3>Hero: Set 2+1 Modrá</h3>
+      <p>Silná vôňa, dokázaná CPA €2.45. Toto je náš hlavný "purchase driver" pre Meta reklamy.</p>
+      <div style="margin-top:16px">
+        <span class="tag tag-gold">€29.80</span>
+        <span class="tag tag-green">Najlepšia marža</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-icon">➕</div>
+      <h3>Upsell: Parfumy do prania</h3>
+      <p>Cross-sell v košíku a cez email. Nie hero pre reklamu, ale zvyšuje AOV a LTV zákazníka.</p>
+      <div style="margin-top:16px">
+        <span class="tag tag-blue">Upsell / Cross-sell</span>
+      </div>
+    </div>
+    <div class="card card-accent">
+      <div class="card-icon">🆕</div>
+      <h3>Expanzia: 2 nové vône</h3>
+      <p>Nové vône vo vývoji — pridajú rozmanitosť a retargeting obsah. Plánujte ich launch ako "event".</p>
+      <div style="margin-top:16px">
+        <span class="tag tag-purple">Q3 2026 Launch</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-2 mt-24">
+    <div class="highlight">
+      <h3>📦 Optimalizácia ponuky (AOV zvýšenie)</h3>
+      <ul style="color:var(--muted); padding-left:20px; margin-top:12px; line-height:2">
+        <li>Pridať <strong style="color:var(--text)">Mix set</strong> — 2 rôzne vône + 1 zadarmo</li>
+        <li>Bundle <strong style="color:var(--text)">vysávač + pranie</strong> za zvýhodnenú cenu</li>
+        <li>Subscription model: "Vôňa každé 3 mesiace" → recurring revenue</li>
+        <li>Vianoce/sezónne edície ako premium gift set</li>
+      </ul>
+    </div>
+    <div class="highlight" style="background: linear-gradient(135deg, rgba(201,168,76,0.1), rgba(76,175,130,0.06));">
+      <h3>💡 Insight zo callu</h3>
+      <p style="color:var(--muted); margin-top:12px; line-height:1.8">
+        <strong style="color:var(--text)">Červená krabička (Baccarat Rouge inšpirácia)</strong> — vôňa vyprchávanie rýchlo, produkt slabý.
+        Riešenie: Nechajte dobiť zásobu, potom vyraďte z portfólia.
+        Nespomínajte ho v reklame. <strong style="color:var(--gold2)">Modrá krabička = víťaz</strong>.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- 4. LEGAL FRAMEWORK -->
+<!-- ============================================================ -->
+<section id="legal" class="fade-in">
+  <div class="section-label">04 — Právny & Meta rámec</div>
+  <h2>Ako komunikovať "inšpirované" bez rizika banu</h2>
+  <p class="section-intro">
+    Toto je kľúčová otázka z callu. Tu je jasný rámec čo môžete, a čo nesmie byť v kreatíve ani na webe.
+  </p>
+
+  <div class="grid-2">
+    <div>
+      <h3 style="color:var(--green); margin-bottom:16px; display:flex; align-items:center; gap:8px;">
+        ✅ Môžete používať
+      </h3>
+      <div class="rule-row ok">
+        <div class="rule-icon">✅</div>
+        <div>
+          <div class="rule-title">"Inšpirované luxusnou vôňou"</div>
+          <div class="rule-desc">Slovo "inšpirované" je legálne v EÚ aj pre Meta reklamy. Nehovorí, že je to rovnaký produkt.</div>
+        </div>
+      </div>
+      <div class="rule-row ok">
+        <div class="rule-icon">✅</div>
+        <div>
+          <div class="rule-title">Opisovanie vône bez mena značky</div>
+          <div class="rule-desc">"Teplá kvetinová vôňa s vanilkou a jahodami" — opisuje vôňu, neporušuje trademark.</div>
+        </div>
+      </div>
+      <div class="rule-row ok">
+        <div class="rule-icon">✅</div>
+        <div>
+          <div class="rule-title">Scent family classifications</div>
+          <div class="rule-desc">"Orientálna vôňa", "Sviežo-kvetinová vôňa", "Drevitá vôňa" — 100% bezpečné.</div>
+        </div>
+      </div>
+      <div class="rule-row ok">
+        <div class="rule-icon">✅</div>
+        <div>
+          <div class="rule-title">Vlastné názvy vôní</div>
+          <div class="rule-desc">Vytvorte si vlastné mená: "Midnight Bloom", "Velvet Rose" — posilňuje brand bez právneho rizika.</div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <h3 style="color:var(--red); margin-bottom:16px; display:flex; align-items:center; gap:8px;">
+        ❌ Nikdy nesmie byť v reklame
+      </h3>
+      <div class="rule-row no">
+        <div class="rule-icon">❌</div>
+        <div>
+          <div class="rule-title">Obrázok / fotka flakóna konkurenta</div>
+          <div class="rule-desc">Toto bol PRAVDEPODOBNÝ dôvod banu — Carolina Herrera Good Girl fľaša v reklame. Meta to skenuje.</div>
+        </div>
+      </div>
+      <div class="rule-row no">
+        <div class="rule-icon">❌</div>
+        <div>
+          <div class="rule-title">Názov chránenej značky v texte reklamy</div>
+          <div class="rule-desc">"Carolina Herrera", "Good Girl", "Baccarat Rouge 540" — nesmie byť v ad copy ani v headline.</div>
+        </div>
+      </div>
+      <div class="rule-row no">
+        <div class="rule-icon">❌</div>
+        <div>
+          <div class="rule-title">Logo alebo farby značky</div>
+          <div class="rule-desc">Napodobovanie vizuálneho štýlu (napr. charakteristická modrá Baccarat Rouge) môže byť problém.</div>
+        </div>
+      </div>
+      <div class="rule-row no">
+        <div class="rule-icon">❌</div>
+        <div>
+          <div class="rule-title">Rýchle škálovanie budgetu na novom účte</div>
+          <div class="rule-desc">+100% budget naraz na nový účet = automatický fraud flag. Škálujte max. +20% každé 3 dni.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="highlight mt-32">
+    <h3>🔍 Prečo pravdepodobne prišiel ban</h3>
+    <p style="color:var(--muted); margin-top:12px; line-height:1.9">
+      Na základe analýzy: Ban <strong style="color:var(--text)">nebol kvôli "inšpirované" komunikácii</strong> —
+      tá je legálna. Kombinácia faktorov: (1) fotka Carolina Herrera fľaše v kreative,
+      (2) nový ad account + dramatický skok z €80/deň na €200/deň za 1 deň,
+      (3) 5 nových reklám spustených naraz,
+      (4) neúplný Business Manager profil (Transparency Policy).
+      <br><br>
+      <strong style="color:var(--gold2)">Riešenie: Čistý nový účet + pomalé škálovanie + zero competitor imagery = ban-free.</strong>
+    </p>
+  </div>
+
+  <div class="mt-32">
+    <h3 style="margin-bottom:20px">Bezpečné komunikačné šablóny</h3>
+    <div class="grid-2">
+      <div class="script-block">
+        <span class="script-label">✅ Bezpečná verzia — Ad text</span>
+        <span class="hook">Váš vysávač môže voňať ako luxusný parfum.</span><br><br>
+        <span class="body">Naše parfumové sáčky do vysávača sú inšpirované najobľúbenejšími letnými vôňami — teplá kvetinová kompozícia s ovocnými tónmi, ktorá premení každé upratovanie na zážitok.</span><br><br>
+        <span class="cta">→ Vyskúšajte Set 2+1 ZADARMO</span>
+      </div>
+      <div class="script-block">
+        <span class="script-label">✅ Bezpečná verzia — popis vône</span>
+        <span class="hook">Modrá edícia — Hielska</span><br><br>
+        <span class="body">Vôňa: Svieža orientálna kompozícia.<br>
+        Tóny: Ruža · Jazmín · Pižmo · Drevo<br>
+        Inšpirovaná: Kultovými luxusnými vôňami<br>
+        Vydrží: 30–90 dní v jednom vysávači</span><br><br>
+        <span class="cta">→ 3 sáčky · 14,90 € · Doprava zadarmo od 30 €</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- 5. META ADS STRATEGY -->
+<!-- ============================================================ -->
+<section id="meta" class="fade-in">
+  <div class="section-label">05 — Meta Ads stratégia</div>
+  <h2>Štruktúra kampaní & škálovanie</h2>
+  <p class="section-intro">
+    Nový čistý účet je šanca začať správne. Postupné škálovanie bez banov.
+  </p>
+
+  <h3 style="margin-bottom:20px; font-size:1rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px;">Fázy škálovania budgetu</h3>
+  <div class="budget-phases">
+    <div class="phase-card">
+      <div class="phase-num">Fáza 1 · Týždeň 1–2</div>
+      <div class="phase-budget">€20</div>
+      <div class="phase-unit">/ deň</div>
+      <div class="phase-goal">Warm-up účtu. 1 kampaň, 2 kreativy. Zbieranie dat. Bez škálovania.</div>
+      <div class="phase-bar"><div class="phase-fill" style="width:20%"></div></div>
+    </div>
+    <div class="phase-card">
+      <div class="phase-num">Fáza 2 · Týždeň 3–4</div>
+      <div class="phase-budget">€35</div>
+      <div class="phase-unit">/ deň</div>
+      <div class="phase-goal">Testovanie 4–5 kreatív. Identifikácia víťaza. Max. +20% budget každé 3 dni.</div>
+      <div class="phase-bar"><div class="phase-fill" style="width:40%"></div></div>
+    </div>
+    <div class="phase-card" style="border-color: var(--accent);">
+      <div class="phase-num">Fáza 3 · Mesiac 2</div>
+      <div class="phase-budget">€60</div>
+      <div class="phase-unit">/ deň</div>
+      <div class="phase-goal">Škálovanie víťazov. Duplikovanie ad setov. Rozšírenie na nové audience.</div>
+      <div class="phase-bar"><div class="phase-fill" style="width:65%"></div></div>
+    </div>
+    <div class="phase-card" style="border-color: var(--gold);">
+      <div class="phase-num">Fáza 4 · Mesiac 3+</div>
+      <div class="phase-budget">€100+</div>
+      <div class="phase-unit">/ deň</div>
+      <div class="phase-goal">Stabilné škálovanie. Retargeting, lookalike. Príprava na CZ expanziu.</div>
+      <div class="phase-bar"><div class="phase-fill" style="width:100%"></div></div>
+    </div>
+  </div>
+
+  <div class="grid-2 mt-32">
+    <div>
+      <h3 style="margin-bottom:20px; font-size:1rem; color:var(--muted); text-transform:uppercase; letter-spacing:1px;">Odporúčaná štruktúra kampaní</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Úroveň</th><th>Nastavenie</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Kampáň typ</td><td>Advantage+ Shopping (Meta ASC)</td></tr>
+            <tr><td>Budget</td><td>CBO — 1 budget na celú kampaň</td></tr>
+            <tr><td>Targeting</td><td>Broad (ženy 22–55, SK) — Meta nech si optimalizuje</td></tr>
+            <tr><td>Kreativy</td><td>3–5 videí + 2 statické v 1 ad sete</td></tr>
+            <tr><td>Pixel</td><td>Nový Pixel — štandardné udalosti: ViewContent, AddToCart, Purchase</td></tr>
+            <tr><td>Optimalizácia</td><td>Purchase (nie ATC — až keď budete mať 50+ nákupov/týždeň)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div>
+      <h3 style="margin-bottom:20px; font-size:1rem; color:var(--muted); text-transform:uppercase; letter-spacing:1px;">Retargeting (fáza 3+)</h3>
+      <div class="card card-accent" style="margin-bottom:12px">
+        <h3 style="font-size:0.9rem">🔄 Warm Audience</h3>
+        <p>Navštívili produkt za 7 dní, neprikúpili. Pripomínacia reklama s Social Proof (hodnotenia, UGC).</p>
+      </div>
+      <div class="card" style="margin-bottom:12px">
+        <h3 style="font-size:0.9rem">🛒 ATC bez nákupu</h3>
+        <p>Vložili do košíka, nedokončili. Reklama s urgency / free shipping offer.</p>
+      </div>
+      <div class="card card-gold">
+        <h3 style="font-size:0.9rem">🤝 Lookalike 1–3%</h3>
+        <p>Zákazníci, čo kúpili → Lookalike audience. Najlepší prospecting po 50+ purchase eventoch.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- 6. CONTENT STRATEGY -->
+<!-- ============================================================ -->
+<section id="content" class="fade-in">
+  <div class="section-label">06 — Content stratégia</div>
+  <h2>Kreatívy, scenáre & formáty</h2>
+  <p class="section-intro">
+    Víťazný formát ste už objavili — žena doma, autenticky, pri vysávaní. Toto škálujeme.
+  </p>
+
+  <div class="grid-3">
+    <div class="card card-gold">
+      <div class="card-icon">🏆</div>
+      <h3>Víťazná formula (dokázané)</h3>
+      <p>Žena doma, autentické prostredie, vysávač, sáčok s vôňou. Žiadna štúdiová produkcia. UGC = výhoda.</p>
+      <div class="mt-16">
+        <span class="tag tag-gold">CPA €2.45</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-icon">📱</div>
+      <h3>Formáty pre Meta</h3>
+      <p>Reel (9:16) — primárny. Square (1:1) — feed. Story (9:16) — retargeting. Min. 30 sek, ideálne 45–60 sek.</p>
+    </div>
+    <div class="card card-accent">
+      <div class="card-icon">⚡</div>
+      <h3>Hook princíp (prvé 3 sekundy)</h3>
+      <p>Otázka alebo tvrdenie, ktoré zastaví scrollovanie. Bez loga, bez intro. Rovno k veci.</p>
+    </div>
+  </div>
+
+  <div class="mt-32">
+    <h3 style="margin-bottom:20px; font-size:1rem; color:var(--muted); text-transform:uppercase; letter-spacing:1px;">
+      Scenáre na testovanie — 5 víťazných konceptov
+    </h3>
+
+    <div class="grid-2">
+      <div>
+        <div class="script-block">
+          <span class="script-label">📹 Scenár 1 — Hook: Problém</span>
+          <span class="hook">[0–3s] "Vedeli ste, že váš vysávač môže voňať ako parfumérka?"</span><br><br>
+          <span class="body">[3–20s] Ukážka — vkladanie sáčku do vysávača. Blízky záber na textúru sáčku. Vysávanie miestnosti.</span><br><br>
+          <span class="body">[20–40s] Reálna reakcia — "Cítite ten rozdiel? Celý dom vonia ako luxusný butik."</span><br><br>
+          <span class="cta">[40–50s] "Vyskúšajte 2+1 ZADARMO → link v bio"</span>
+        </div>
+
+        <div class="script-block">
+          <span class="script-label">📹 Scenár 2 — Hook: Sociálny dôkaz</span>
+          <span class="hook">[0–3s] "Prečo 847 žien zo Slovenska zmenilo, čím voňa ich domov..."</span><br><br>
+          <span class="body">[3–30s] Quick cuts — rôzne domovy, vysávanie, reakcie ľudí. Krátke UGC clips.</span><br><br>
+          <span class="body">[30–45s] "Náš sáčok vydrží až 90 dní. Vložíte raz, voní celé mesiace."</span><br><br>
+          <span class="cta">[45–55s] CTA s urgency: "Len 300 setov na sklade →"</span>
+        </div>
+      </div>
+
+      <div>
+        <div class="script-block">
+          <span class="script-label">📹 Scenár 3 — Hook: Demo/Kontrast</span>
+          <span class="hook">[0–3s] "Toto je rozdiel medzi bežným a luxusným domovom." [split screen]</span><br><br>
+          <span class="body">[3–25s] Ľavá strana: Starý generický osviežovač. Pravá strana: Vonea.sk sáčok. Vôňa po celej miestnosti.</span><br><br>
+          <span class="body">[25–45s] "Inšpirovaná najobľúbenejšími letnými vôňami sveta."</span><br><br>
+          <span class="cta">[45–55s] "Prvý set za zvýhodnenú cenu → wada.sk"</span>
+        </div>
+
+        <div class="script-block">
+          <span class="script-label">📹 Scenár 4 — Hook: Záujem / Nový produkt</span>
+          <span class="hook">[0–3s] "Toto existuje a vy ste o tom ešte nepočuli..."</span><br><br>
+          <span class="body">[3–20s] Unboxing — elegantná krabička, sáčky, blízky záber. ASMR zvuky.</span><br><br>
+          <span class="body">[20–40s] "Parfumovaný sáček do vysávača. Vkladáte raz, voní celý dom pri každom upratovaní."</span><br><br>
+          <span class="cta">[40–55s] "Vyskúšajte novú kategóriu → Set 2+1 ZADARMO"</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="highlight mt-24">
+    <h3>⚠️ Pravidlá pre VŠETKY kreatívy</h3>
+    <div class="grid-2" style="margin-top:16px">
+      <ul style="color:var(--muted); list-style:none; line-height:2">
+        <li>✅ Žiadne logá ani fľaše iných značiek v zábere</li>
+        <li>✅ Žiadne trademark názvy v texte videa ani v ad copy</li>
+        <li>✅ Autentické prostredie = lepšie výsledky</li>
+      </ul>
+      <ul style="color:var(--muted); list-style:none; line-height:2">
+        <li>✅ Titulky / subtitles vždy (80% bez zvuku)</li>
+        <li>✅ Hook v prvých 3 sekundách</li>
+        <li>✅ Jeden CTA na jedno video</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- 7. PRICING STRATEGY -->
+<!-- ============================================================ -->
+<section id="pricing" class="fade-in">
+  <div class="section-label">07 — Cenová stratégia</div>
+  <h2>Ako správne nastaviť ceny</h2>
+  <p class="section-intro">
+    Cenová stratégia nie je len o číslach — je o tom, ako zákazník vníma hodnotu.
+    Vonea.sk má správny základ, ale niekoľko úprav dokáže zvýšiť zisk bez jedinej koruny navyše do reklamy.
+  </p>
+
+  <!-- MARGIN KALKULAČKA -->
+  <h3 style="font-size:1rem; color:var(--muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:20px;">Reálna marža — kde stojíte teraz</h3>
+  <div class="table-wrap mb-24">
+    <table>
+      <thead>
+        <tr>
+          <th>Položka</th>
+          <th>1 krabička</th>
+          <th>Set 2+1 (hero)</th>
+          <th>Starter Pack €49.90</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Predajná cena (s DPH)</td>
+          <td>€14.90</td>
+          <td style="color:var(--gold2); font-weight:700">€29.80</td>
+          <td>€49.90</td>
+        </tr>
+        <tr>
+          <td>Príjem bez DPH (20%)</td>
+          <td>€12.42</td>
+          <td>€24.83</td>
+          <td>€41.58</td>
+        </tr>
+        <tr>
+          <td>Nákupná cena produktu</td>
+          <td>~€3.33</td>
+          <td>~€10.00</td>
+          <td>~€16.00</td>
+        </tr>
+        <tr>
+          <td>Fulfillment + balenie</td>
+          <td>€3.35</td>
+          <td>€3.35</td>
+          <td>€3.35</td>
+        </tr>
+        <tr>
+          <td style="font-weight:700">Hrubá marža pred reklamou</td>
+          <td style="color:var(--muted)">~€5.74</td>
+          <td style="color:var(--green); font-weight:700">~€11.48</td>
+          <td style="color:var(--green); font-weight:700">~€22.23</td>
+        </tr>
+        <tr>
+          <td>Max. CPA pre break-even</td>
+          <td style="color:var(--red)">€5.74</td>
+          <td style="color:var(--green); font-weight:700">€11.48</td>
+          <td style="color:var(--green)">€22.23</td>
+        </tr>
+        <tr>
+          <td>Cieľová CPA (zisk)</td>
+          <td style="color:var(--muted)">€3–4</td>
+          <td style="color:var(--gold2); font-weight:700">€3–7 ✓</td>
+          <td style="color:var(--gold2)">€8–14</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="highlight" style="border-color:rgba(76,175,130,0.4); background:rgba(76,175,130,0.06)">
+    <h3 style="color:var(--green)">💡 Kľúčový záver z tabuľky</h3>
+    <p style="color:var(--muted); margin-top:12px; line-height:1.9">
+      <strong style="color:var(--text)">1 krabička (€14.90) je nebezpečný produkt na reklamu.</strong>
+      Hrubá marža €5.74 znamená, že každé euro navyše v CPA ide priamo zo zisku. Pri CPA €7 ste v strate.
+      <br>Preto: <strong style="color:var(--green)">Set 2+1 je správny hero</strong> — marža €11.48 dáva priestor na CPA až €11 a stále ste na nule. Ideál je CPA €3–7 = čistý zisk €4–8 na objednávku.
+    </p>
+  </div>
+
+  <!-- CENOVÉ ÚROVNE -->
+  <h3 style="font-size:1rem; color:var(--muted); text-transform:uppercase; letter-spacing:1px; margin-top:48px; margin-bottom:20px;">Odporúčaná cenová architektúra</h3>
+
+  <div class="grid-3">
+    <div class="price-card">
+      <div class="price-val">€14.90</div>
+      <div class="price-unit">Vstupný tier — 1 krabička</div>
+      <ul class="price-features">
+        <li>Znížiť nákupnú bariéru pre nových zákazníkov</li>
+        <li>Nikdy hlavný produkt reklamy</li>
+        <li>Upsell v košíku na Set</li>
+        <li>Alebo zvážiť zdvihnúť na <strong>€15.90</strong> (+€1 = +7% marža)</li>
+      </ul>
+    </div>
+    <div class="price-card featured">
+      <span class="badge">Hero — do reklamy</span>
+      <div class="price-val">€29.80</div>
+      <div class="price-unit">Set 2+1 ZADARMO</div>
+      <ul class="price-features">
+        <li>Hlavný produkt všetkých Meta kampaní</li>
+        <li>Dokázaná CPA €2.45 — tu škálujeme</li>
+        <li>Marža €11.48 = zdravý priestor na CPA</li>
+        <li>Zdôrazniť: "Hodnota €44.70 — platíte iba €29.80"</li>
+      </ul>
+    </div>
+    <div class="price-card" style="border-color:var(--gold);">
+      <div class="price-val">€39.90</div>
+      <div class="price-unit">Mix set — 3 rôzne vône (nový)</div>
+      <ul class="price-features">
+        <li>Zákazník vyskúša všetky dostupné vône</li>
+        <li>Vyššie AOV = lepší ROAS z tej istej kampane</li>
+        <li>Ideálne ako darček (Vianoce, narodeninový gift)</li>
+        <li>Marža ~€18 → CPA až €15 = stále zisk</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- PSYCHOLÓGIA CIEN -->
+  <h3 style="font-size:1rem; color:var(--muted); text-transform:uppercase; letter-spacing:1px; margin-top:48px; margin-bottom:20px;">Psychológia cien — malé zmeny, veľký efekt</h3>
+  <div class="grid-2">
+    <div>
+      <div class="rule-row ok">
+        <div class="rule-icon">🧠</div>
+        <div>
+          <div class="rule-title">Ankoring — "Pôvodná cena" v reklame</div>
+          <div class="rule-desc">
+            Set 2+1 nekomunikovať ako "€29.80" — komunikovať ako
+            <strong style="color:var(--green)">"Hodnota €44.70 → Vy platíte €29.80"</strong>.
+            Zákazník vidí, že ušetrí €14.90. Rovnaká cena, úplne iné vnímanie hodnoty.
+          </div>
+        </div>
+      </div>
+      <div class="rule-row ok">
+        <div class="rule-icon">🔢</div>
+        <div>
+          <div class="rule-title">Charm pricing — .90 vs .99 vs .00</div>
+          <div class="rule-desc">
+            Pre prémiové produkty inšpirované luxusom: <strong style="color:var(--green)">€14.90 a €29.80 sú správne</strong>.
+            Čísla .99 pôsobia lacno. Čísla .90 sú "premium but accessible". Okrúhle €15/€30 testovať — môžu zvýšiť AOV bez poklesu konverzií.
+          </div>
+        </div>
+      </div>
+      <div class="rule-row ok">
+        <div class="rule-icon">🎯</div>
+        <div>
+          <div class="rule-title">Free shipping threshold — znížiť na €35</div>
+          <div class="rule-desc">
+            Súčasný prah dopravy zadarmo je €45. Pre Set 2+1 (€29.80) zákazník musí pridať €15.20 navyše — príliš veľa.
+            <strong style="color:var(--green)">Znížte na €35</strong> → zákazník pridá parfum do prania za €5.20 → AOV rastie prirodzene.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="rule-row ok">
+        <div class="rule-icon">📦</div>
+        <div>
+          <div class="rule-title">Decoy pricing — 3-tierový výber</div>
+          <div class="rule-desc">
+            Keď zákazník vidí 3 možnosti (1 krabička / Set 2+1 / Mix set), prirodzene si vyberie strednú.
+            <strong style="color:var(--green)">Set 2+1 = "rozumný výber"</strong> vedľa lacnejšej a drahšej možnosti. Toto zvyšuje konverziu na hero produkte.
+          </div>
+        </div>
+      </div>
+      <div class="rule-row ok">
+        <div class="rule-icon">⏰</div>
+        <div>
+          <div class="rule-title">Urgency bez klamstva</div>
+          <div class="rule-desc">
+            "Skladom posledných 47 kusov" (ak je to pravda) alebo "Aktuálna cena platí do nedele" — funguje.
+            <strong style="color:var(--green)">Flash sale 20% každý mesiac</strong> ale nerobí, degraduje brand. Radšej limitované edície a sezónne sety.
+          </div>
+        </div>
+      </div>
+      <div class="rule-row ok">
+        <div class="rule-icon">💬</div>
+        <div>
+          <div class="rule-title">Komunikovať cenu cez "cena za použitie"</div>
+          <div class="rule-desc">
+            Zákazník vidí €29.80 — to znie draho. Prepočet:
+            <strong style="color:var(--green)">"Váš domov vonia luxusne za menej ako €0.50 za deň"</strong>
+            (€29.80 ÷ 60 dní = €0.50). Toto mentálne zúčtovanie mení rozhodnutie.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOVÉ CENOVÉ PRODUKTY -->
+  <h3 style="font-size:1rem; color:var(--muted); text-transform:uppercase; letter-spacing:1px; margin-top:48px; margin-bottom:20px;">Nové produkty a cenové príležitosti</h3>
+  <div class="grid-2">
+    <div class="card card-green">
+      <div class="card-icon">🔁</div>
+      <h3>Subscription — "Vôňa každé 3 mesiace"</h3>
+      <p style="margin-top:8px; color:var(--muted); line-height:1.9">
+        <strong style="color:var(--text)">Cena:</strong> €12.90/kvartál (1 krabička, ušetríte €2)<br>
+        <strong style="color:var(--text)">Prečo to funguje:</strong> Zákazník si "zabudne" na predplatné, krabička príde automaticky.<br>
+        <strong style="color:var(--text)">LTV zákazníka:</strong> jednorazový nákup = €14.90 vs. predplatné = <span style="color:var(--green)">€51.60/rok</span><br>
+        <strong style="color:var(--text)">Platformy:</strong> Shoptet má natívnu podporu predplatného.
+      </p>
+      <div style="margin-top:16px">
+        <span class="tag tag-green">+3.5× LTV</span>
+        <span class="tag tag-green">Predvídateľný príjem</span>
+      </div>
+    </div>
+    <div class="card card-gold">
+      <div class="card-icon">🎁</div>
+      <h3>Darčekový Gift Set — sezónná edícia</h3>
+      <p style="margin-top:8px; color:var(--muted); line-height:1.9">
+        <strong style="color:var(--text)">Obsah:</strong> 3 rôzne vône + krásna krabica + kartička<br>
+        <strong style="color:var(--text)">Cena:</strong> €39.90–€44.90<br>
+        <strong style="color:var(--text)">Kedy spustiť:</strong> November (pred Vianocami), Valentín, Deň matiek<br>
+        <strong style="color:var(--text)">Výhoda:</strong> Kupujúci ≠ používateľ → nový zákazník cez dar.
+      </p>
+      <div style="margin-top:16px">
+        <span class="tag tag-gold">Sezónny predaj</span>
+        <span class="tag tag-gold">Nový segment zákazníkov</span>
+      </div>
+    </div>
+    <div class="card card-accent">
+      <div class="card-icon">⬆️</div>
+      <h3>Upsell v košíku — cross-kategória</h3>
+      <p style="margin-top:8px; color:var(--muted); line-height:1.9">
+        Zákazník kupuje Set do vysávača → ponúknite:
+        <strong style="color:var(--text)">"Skúste aj parfum do prania — rovnaká vôňa pre váš domov"</strong> za €5 zľavy.
+        AOV sa zvyšuje z €29.80 na €40–45 bez žiadnej extra reklamy.
+      </p>
+      <div style="margin-top:16px">
+        <span class="tag tag-purple">+€10–15 AOV</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🏷️</div>
+      <h3>Affiliate / Influencer kód</h3>
+      <p style="margin-top:8px; color:var(--muted); line-height:1.9">
+        Každý influencer dostane unikátny zľavový kód (napr. BASKA10 = 10% zľava).
+        <strong style="color:var(--text)">Cena pre zákazníka:</strong> €26.82 (Set 2+1 mínus 10%).<br>
+        <strong style="color:var(--text)">Výhoda:</strong> Merateľnosť — viete presne, ktorý influencer konvertuje.
+        <strong style="color:var(--text)">Marža:</strong> stále zdravá (€8.50+).
+      </p>
+      <div style="margin-top:16px">
+        <span class="tag tag-blue">Merateľný ROI</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CENOVÁ MAPA -->
+  <div class="highlight mt-32">
+    <h3>🗺️ Výsledná cenová mapa Vonea.sk — parfumy do vysávača</h3>
+    <div style="margin-top:20px; display:grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap:12px;">
+      <div style="text-align:center; padding:16px; background:var(--bg); border-radius:12px; border:1px solid var(--border);">
+        <div style="font-size:0.75rem; color:var(--muted); text-transform:uppercase; letter-spacing:1px;">Skúšobný</div>
+        <div style="font-size:1.6rem; font-weight:800; color:var(--text); margin:8px 0;">€14.90</div>
+        <div style="font-size:0.8rem; color:var(--muted);">1 krabička<br>3 sáčky</div>
+      </div>
+      <div style="text-align:center; padding:16px; background:rgba(124,92,191,0.1); border-radius:12px; border:2px solid var(--accent);">
+        <div style="font-size:0.75rem; color:var(--accent); text-transform:uppercase; letter-spacing:1px; font-weight:700;">⭐ Hero</div>
+        <div style="font-size:1.6rem; font-weight:800; color:var(--accent2); margin:8px 0;">€29.80</div>
+        <div style="font-size:0.8rem; color:var(--muted);">Set 2+1 zadarmo<br>6 sáčkov</div>
+      </div>
+      <div style="text-align:center; padding:16px; background:var(--bg); border-radius:12px; border:1px solid var(--gold);">
+        <div style="font-size:0.75rem; color:var(--gold); text-transform:uppercase; letter-spacing:1px;">Premium</div>
+        <div style="font-size:1.6rem; font-weight:800; color:var(--gold2); margin:8px 0;">€39.90</div>
+        <div style="font-size:0.8rem; color:var(--muted);">Mix 3 vône<br>9 sáčkov</div>
+      </div>
+      <div style="text-align:center; padding:16px; background:var(--bg); border-radius:12px; border:1px solid var(--green);">
+        <div style="font-size:0.75rem; color:var(--green); text-transform:uppercase; letter-spacing:1px;">Gift / Sezóna</div>
+        <div style="font-size:1.6rem; font-weight:800; color:var(--green); margin:8px 0;">€44.90</div>
+        <div style="font-size:0.8rem; color:var(--muted);">Darčekový set<br>+ krabica</div>
+      </div>
+      <div style="text-align:center; padding:16px; background:var(--bg); border-radius:12px; border:1px solid var(--blue);">
+        <div style="font-size:0.75rem; color:var(--blue); text-transform:uppercase; letter-spacing:1px;">Predplatné</div>
+        <div style="font-size:1.6rem; font-weight:800; color:var(--blue); margin:8px 0;">€12.90</div>
+        <div style="font-size:0.8rem; color:var(--muted);">/ každé 3 mesiace<br>automaticky</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- 8. ACTION PLAN -->
+<!-- ============================================================ -->
+<section id="plan" class="fade-in">
+  <div class="section-label">08 — Akčný plán</div>
+  <h2>Čo robíme krok za krokom</h2>
+  <p class="section-intro">
+    Konkrétny 90-dňový plán s týždenným rozpadom. Žiadna teória — len akcie.
+  </p>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-left">
+        <div class="tl-dot active">1</div>
+        <div class="tl-line"></div>
+      </div>
+      <div class="tl-content">
+        <div class="tl-week">Týždeň 1 — Príprava</div>
+        <div class="tl-title">Technická príprava & prvá kampaň</div>
+        <div class="tl-body">
+          Overiť kompletnosť Business Managera (Transparency Policy). Nastaviť Meta Pixel — všetky štandardné events.
+          Pripojiť katalóg produktov. Vybrať 2 existujúce video kreatívy (víťaz z Instagramu ako #1).
+          Spustiť ASC kampaň: €20/deň, broad targeting, ženy 22–55, SK.
+        </div>
+        <div class="tl-tags mt-8">
+          <span class="tag tag-blue">Tech setup</span>
+          <span class="tag tag-purple">€20/deň</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-left">
+        <div class="tl-dot active">2</div>
+        <div class="tl-line"></div>
+      </div>
+      <div class="tl-content">
+        <div class="tl-week">Týždeň 2 — Testovanie kreatív</div>
+        <div class="tl-title">4–5 nových videí podľa scenárov</div>
+        <div class="tl-body">
+          Natočiť 4 nové videá (podľa scenárov vyššie). Žiadne značky iných produktov.
+          Postupné pridávanie do kampane (max. 2 nové kreatívy týždenne). Čítať výsledky — CTR, CPC, CPA.
+          Budget: €25/deň (max. +25% oproti týždňu 1).
+        </div>
+        <div class="tl-tags mt-8">
+          <span class="tag tag-gold">UGC video</span>
+          <span class="tag tag-purple">€25/deň</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-left">
+        <div class="tl-dot active">3</div>
+        <div class="tl-line"></div>
+      </div>
+      <div class="tl-content">
+        <div class="tl-week">Týždeň 3–4 — Optimalizácia</div>
+        <div class="tl-title">Vypnutie nevíťazov, škálovanie víťazov</div>
+        <div class="tl-body">
+          Vypnúť kreatívy s CPA nad €12. Duplikovať víťaza do druhého ad setu.
+          Testovať statické kreatívy (carousel + single image). Pridať retargeting kampaň pre visited/ATC.
+          Budget: €35–40/deň.
+        </div>
+        <div class="tl-tags mt-8">
+          <span class="tag tag-green">Optimalizácia</span>
+          <span class="tag tag-purple">€35–40/deň</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-left">
+        <div class="tl-dot gold">4</div>
+        <div class="tl-line"></div>
+      </div>
+      <div class="tl-content">
+        <div class="tl-week">Mesiac 2 — Škálovanie</div>
+        <div class="tl-title">Stabilný rast + email marketing</div>
+        <div class="tl-body">
+          Lookalike audience z purchaseroch (keď 50+ nákupov). Spustiť email flow — welcome series + post-purchase (upsell na nové vône).
+          Testovanie TikTok Ads (nový kanál, iné audience). Budget: €60–80/deň.
+        </div>
+        <div class="tl-tags mt-8">
+          <span class="tag tag-gold">Škálovanie</span>
+          <span class="tag tag-blue">Email</span>
+          <span class="tag tag-purple">€60–80/deň</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-left">
+        <div class="tl-dot gold">5</div>
+        <div class="tl-line"></div>
+      </div>
+      <div class="tl-content">
+        <div class="tl-week">Mesiac 3 — Expanzia</div>
+        <div class="tl-title">Česká republika + nové vône</div>
+        <div class="tl-body">
+          Launch nových 2 vôní (event-driven reklamy). Spustiť Czech verziu kampane (CZ Meta účet, CZK pricing).
+          Lookalike z SK zákazníkov do CZ kampane. Príprava Gift Set pre sezónny predaj.
+          Budget SK: €100+/deň. Budget CZ: €30–50/deň (test).
+        </div>
+        <div class="tl-tags mt-8">
+          <span class="tag tag-gold">CZ Expanzia</span>
+          <span class="tag tag-green">Nové vône</span>
+          <span class="tag tag-purple">€100+/deň</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- 9. KPIs -->
+<!-- ============================================================ -->
+<section id="kpis" class="fade-in">
+  <div class="section-label">09 — KPIs & Reportovanie</div>
+  <h2>Čo meriame & čo hľadáme</h2>
+  <p class="section-intro">
+    Jednoznačné ciele. Ak čísla sú v zelenej zóne, škálujeme. Ak nie, meníme kreatívu.
+  </p>
+
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-target">≤ €7</div>
+      <div class="kpi-name">CPA cieľ</div>
+      <div class="kpi-note">Max. €10 pre break-even. Pod €7 = škálujeme.</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-target">≥ 3×</div>
+      <div class="kpi-name">ROAS</div>
+      <div class="kpi-note">Min. 2.5× pre životaschopnosť. 4× = výborné.</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-target">≥ 2.5%</div>
+      <div class="kpi-name">CTR (Link)</div>
+      <div class="kpi-note">Pod 1% = zlá kreativa alebo audience. Meniť.</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-target">≤ €0.45</div>
+      <div class="kpi-name">CPC</div>
+      <div class="kpi-note">Pre SK trh. Nad €0.80 = problém s relevance.</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-target">≥ €29</div>
+      <div class="kpi-name">AOV</div>
+      <div class="kpi-note">Cieľ: Set 2+1. Zvýšiť na €35 s upsellom.</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-target">≥ 20%</div>
+      <div class="kpi-name">Repeat rate</div>
+      <div class="kpi-note">20%+ opakovaných nákupov = zdravý brand.</div>
+    </div>
+  </div>
+
+  <div class="highlight mt-32">
+    <h3>📅 Reportovanie — odporúčaný rytmus</h3>
+    <div class="grid-3" style="margin-top:16px">
+      <div>
+        <p style="color:var(--accent2); font-weight:700; margin-bottom:8px">Týždenne</p>
+        <p style="color:var(--muted); font-size:0.875rem">CPA, ROAS, CTR per kreativa. Vypnúť nad-budget kreatívy.</p>
+      </div>
+      <div>
+        <p style="color:var(--gold2); font-weight:700; margin-bottom:8px">Mesačne</p>
+        <p style="color:var(--muted); font-size:0.875rem">Celkový ROAS, AOV trend, počet nových vs. vrátených zákazníkov.</p>
+      </div>
+      <div>
+        <p style="color:var(--green); font-weight:700; margin-bottom:8px">Kvartálne</p>
+        <p style="color:var(--muted); font-size:0.875rem">LTV analýza, pripravenosť na expanziu do CZ/PL, nové produkty.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- 10. COLLABORATION MODEL -->
+<!-- ============================================================ -->
+<section id="collaboration" class="fade-in">
+  <div class="section-label">10 — Model spolupráce</div>
+  <h2>Podmienky spolupráce</h2>
+  <p class="section-intro">
+    Jednoduchý, transparentný model. Platíte len keď to funguje. Štartujeme od polovice mesiaca — čas sú peniaze.
+  </p>
+
+  <!-- 3 PILIERE -->
+  <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:20px; margin-bottom:40px;">
+
+    <div style="background:var(--card); border:2px solid var(--accent); border-radius:var(--radius); padding:32px; text-align:center;">
+      <div style="font-size:0.75rem; color:var(--accent); text-transform:uppercase; letter-spacing:2px; font-weight:700; margin-bottom:12px;">Jednorázový setup</div>
+      <div style="font-size:3rem; font-weight:900; color:var(--accent2); line-height:1;">€350</div>
+      <div style="font-size:0.85rem; color:var(--muted); margin-top:8px;">jednorazovo · pri štarte</div>
+      <div style="margin-top:16px; font-size:0.8rem; color:var(--muted); border-top:1px solid var(--border); padding-top:16px; text-align:left; line-height:1.8;">
+        Technický setup · Pixel · Katalóg · Štruktúra kampaní · Stratégia · Briefing kreatív
+      </div>
+    </div>
+
+    <div style="background:rgba(201,168,76,0.08); border:2px solid var(--gold); border-radius:var(--radius); padding:32px; text-align:center;">
+      <div style="font-size:0.75rem; color:var(--gold); text-transform:uppercase; letter-spacing:2px; font-weight:700; margin-bottom:12px;">Success fee</div>
+      <div style="font-size:3rem; font-weight:900; color:var(--gold2); line-height:1;">10%</div>
+      <div style="font-size:0.85rem; color:var(--muted); margin-top:8px;">z každej Meta objednávky</div>
+      <div style="margin-top:16px; font-size:0.8rem; color:var(--muted); border-top:1px solid var(--border); padding-top:16px; text-align:left; line-height:1.8;">
+        <strong style="color:var(--gold2)">IBA keď CPA &lt; €8</strong><br>
+        Atribúcia: 7-dňový view · 1-dňový click<br>
+        Keď CPA ≥ €8 → €0 success fee
+      </div>
+    </div>
+
+    <div style="background:rgba(76,175,130,0.06); border:2px solid var(--green); border-radius:var(--radius); padding:32px; text-align:center;">
+      <div style="font-size:0.75rem; color:var(--green); text-transform:uppercase; letter-spacing:2px; font-weight:700; margin-bottom:12px;">Bonus ZADARMO</div>
+      <div style="font-size:3rem; font-weight:900; color:var(--green); line-height:1;">€200</div>
+      <div style="font-size:0.85rem; color:var(--muted); margin-top:8px;">hodnota / mesiac · grátis</div>
+      <div style="margin-top:16px; font-size:0.8rem; color:var(--muted); border-top:1px solid var(--border); padding-top:16px; text-align:left; line-height:1.8;">
+        Konzultácie kreatív · Marketingová stratégia · Spätná väzba na obsah · Návrhy scenárov
+      </div>
+    </div>
+
+  </div>
+
+  <!-- CPA PRAH — PREČO €8 -->
+  <div class="highlight" style="border-color:rgba(201,168,76,0.4); background:rgba(201,168,76,0.06); margin-bottom:32px;">
+    <h3 style="color:var(--gold2)">Prečo prah CPA práve €8?</h3>
+    <p style="color:var(--muted); margin-top:12px; line-height:1.9">
+      Pri vašej marži ~€11.48 na Set 2+1: CPA €8 + môj success fee €2.98 = klient ešte v zisku.
+      Pri CPA nad €8 by success fee zákazníka tlačil do straty — to nie je fér.
+      <strong style="color:var(--text)">Pod €8 zarábame obaja. Nad €8 robím ďalej, len bez %. Zastavujem reklamu až keď CPA dlhodobo prevyšuje €11.</strong>
+    </p>
+  </div>
+
+  <!-- KALKULAČKA SCENÁROV -->
+  <h3 style="font-size:1rem; color:var(--muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:16px;">Ako vyzerá spolupráca v číslach</h3>
+  <div class="table-wrap mb-32">
+    <table>
+      <thead>
+        <tr>
+          <th>Scenár</th>
+          <th>Budget / deň</th>
+          <th>CPA</th>
+          <th>Obj. / mesiac</th>
+          <th>Obrat Meta</th>
+          <th>Môj success fee</th>
+          <th>Váš čistý zisk*</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Rozjazd (pol mesiaca)</td>
+          <td>€30</td>
+          <td>€5–7</td>
+          <td>~65–90</td>
+          <td>~€2 200</td>
+          <td style="color:var(--gold2)">~€220</td>
+          <td style="color:var(--green)">~€230</td>
+        </tr>
+        <tr style="background:rgba(124,92,191,0.04)">
+          <td>Mesiac 1 — full</td>
+          <td>€30</td>
+          <td>€5–7</td>
+          <td>~130–180</td>
+          <td>~€4 700</td>
+          <td style="color:var(--gold2)">~€470</td>
+          <td style="color:var(--green)">~€500</td>
+        </tr>
+        <tr>
+          <td>Mesiac 2 — škálovanie</td>
+          <td>€60</td>
+          <td>€4–6</td>
+          <td>~300–450</td>
+          <td>~€11 200</td>
+          <td style="color:var(--gold2)">~€1 120</td>
+          <td style="color:var(--green)">~€1 400</td>
+        </tr>
+        <tr style="background:rgba(201,168,76,0.04)">
+          <td><strong>Mesiac 3+ — rast</strong></td>
+          <td>€100+</td>
+          <td>€3–5</td>
+          <td>~600–1 000</td>
+          <td>~€22 000</td>
+          <td style="color:var(--gold2); font-weight:700">~€2 200</td>
+          <td style="color:var(--green); font-weight:700">~€3 500+</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:0.78rem; color:var(--muted); margin-bottom:40px;">* Čistý zisk klienta po odpočte: náklady na produkt, fulfillment, ad spend a môj success fee. Min. spend: €30/deň.</p>
+
+  <!-- POVINNOSTI KLIENTA -->
+  <h3 style="font-size:1rem; color:var(--muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:20px;">Čo je potrebné od vašej strany</h3>
+  <div class="grid-2">
+    <div>
+      <div class="rule-row ok">
+        <div class="rule-icon">🎬</div>
+        <div>
+          <div class="rule-title">Min. 10 nových kreatív každé 2 týždne</div>
+          <div class="rule-desc">Videá, bannery, fotky, carousely. Bez čerstvého obsahu sa kampane unavujú a CPA rastie. Toto je podmienka aby som mohol robiť svoju prácu na 100%.</div>
+        </div>
+      </div>
+      <div class="rule-row ok">
+        <div class="rule-icon">💰</div>
+        <div>
+          <div class="rule-title">Minimálny ad spend €30/deň — bez výnimky</div>
+          <div class="rule-desc">Pod €30/deň nie je objem na optimalizáciu. Meta algoritmus potrebuje dáta. Pod tento prah spolupráca nedáva zmysel ani jednej strane.</div>
+        </div>
+      </div>
+      <div class="rule-row ok">
+        <div class="rule-icon">⚡</div>
+        <div>
+          <div class="rule-title">Rýchla komunikácia — do 24 hodín</div>
+          <div class="rule-desc">Schvaľovanie kreatív, odpovede na otázky, urgentné rozhodnutia. Kampane nečakajú.</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="rule-row ok">
+        <div class="rule-icon">🚫</div>
+        <div>
+          <div class="rule-title">Žiadne logá/fľaše iných značiek v kreatívach</div>
+          <div class="rule-desc">Ochrana pred ďalším banom. Každá kreativa pred spustením prechádza mojou kontrolou — ale základná zodpovednosť je na vás.</div>
+        </div>
+      </div>
+      <div class="rule-row ok">
+        <div class="rule-icon">📊</div>
+        <div>
+          <div class="rule-title">Transparentný prístup do e-shopu a analytiky</div>
+          <div class="rule-desc">Shoptet analytics, Google Analytics ak existuje. Potrebujem vidieť celý funnel — nielen Meta čísla.</div>
+        </div>
+      </div>
+      <div class="rule-row ok">
+        <div class="rule-icon">🗓️</div>
+        <div>
+          <div class="rule-title">Mesačný call — 45 minút</div>
+          <div class="rule-desc">Výsledky, plán ďalšieho mesiaca, nové nápady. Toto nie je voliteľné — je to súčasť spolupráce.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ČO DOSTANÚ -->
+  <h3 style="font-size:1rem; color:var(--muted); text-transform:uppercase; letter-spacing:1px; margin-top:40px; margin-bottom:20px;">Čo dostanete od mojej strany</h3>
+  <div class="grid-3">
+    <div class="card card-accent">
+      <div class="card-icon">🧠</div>
+      <h3>Know-how & stratégia</h3>
+      <p style="color:var(--muted); margin-top:8px; font-size:0.875rem; line-height:1.8">
+        Viem ako optimalizovať, škálovať a dlhodobo udržiavať nízku CPA. Toto ste doteraz platili agentúram za €700+/mes.
+      </p>
+    </div>
+    <div class="card card-gold">
+      <div class="card-icon">⚙️</div>
+      <h3>Správa kampaní</h3>
+      <p style="color:var(--muted); margin-top:8px; font-size:0.875rem; line-height:1.8">
+        Štruktúra, optimalizácia, škálovanie, A/B testovanie kreatív, monitoring banov — každý týždeň, nie raz za mesiac.
+      </p>
+    </div>
+    <div class="card card-green">
+      <div class="card-icon">🎁</div>
+      <h3>Konzultácie GRÁTIS (€200/mes)</h3>
+      <p style="color:var(--muted); margin-top:8px; font-size:0.875rem; line-height:1.8">
+        Kreatívna stratégia, scenáre videí, spätná väzba na obsah, návrhy kampaní. Toto je bonus navyše — v cene.
+      </p>
+    </div>
+  </div>
+
+  <!-- ŠTART -->
+  <div class="highlight mt-32" style="border-color:rgba(76,143,255,0.4); background:rgba(76,143,255,0.06);">
+    <h3 style="color:var(--blue)">🚀 Štartujeme od polovice mesiaca — bez odkladov</h3>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:16px; margin-top:20px;">
+      <div style="background:var(--bg); border-radius:12px; padding:16px; border:1px solid var(--border);">
+        <div style="color:var(--blue); font-weight:700; font-size:0.8rem; text-transform:uppercase; letter-spacing:1px; margin-bottom:8px;">Deň 1</div>
+        <div style="font-size:0.875rem; color:var(--muted); line-height:1.7;">Platba €350 · prístup do BM · technický audit Pixel + katalóg</div>
+      </div>
+      <div style="background:var(--bg); border-radius:12px; padding:16px; border:1px solid var(--border);">
+        <div style="color:var(--blue); font-weight:700; font-size:0.8rem; text-transform:uppercase; letter-spacing:1px; margin-bottom:8px;">Deň 2–3</div>
+        <div style="font-size:0.875rem; color:var(--muted); line-height:1.7;">Nastavenie kampane · brief na kreatívy · schválenie existujúcich videí</div>
+      </div>
+      <div style="background:var(--bg); border-radius:12px; padding:16px; border:1px solid var(--border);">
+        <div style="color:var(--blue); font-weight:700; font-size:0.8rem; text-transform:uppercase; letter-spacing:1px; margin-bottom:8px;">Deň 4</div>
+        <div style="font-size:0.875rem; color:var(--muted); line-height:1.7;">Spustenie kampane · €30/deň · ASC broad targeting · monitoring</div>
+      </div>
+      <div style="background:var(--bg); border-radius:12px; padding:16px; border:1px solid var(--border);">
+        <div style="color:var(--blue); font-weight:700; font-size:0.8rem; text-transform:uppercase; letter-spacing:1px; margin-bottom:8px;">Deň 7</div>
+        <div style="font-size:0.875rem; color:var(--muted); line-height:1.7;">Prvý report · optimalizácia · nové kreatívy do rotácie</div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Pripravil <strong>Damián Drahovský</strong> · Máj 2026</p>
+  <p style="margin-top:8px; font-size:0.8rem">Táto stratégia je dôverný dokument vytvorený pre Vonea.sk / Dalibor Hutník.</p>
+</footer>
+</main>
+
+<script>
+  // Progress bar
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = (scrolled / total) * 100;
+    document.getElementById('progress-fill').style.width = pct + '%';
+  });
+
+  // Fade-in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
